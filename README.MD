@@ -24,56 +24,57 @@
 ## Description
 
 Provides a way to configure **user rights assignments** in local security policies using PowerShell without using `secedit.exe`.
+This module is alternative to [SecurityPolicyDSC](https://github.com/dsccommunity/SecurityPolicyDsc) which uses a wrapper around secedit.exe.
 
 ### Supported User Rights Assignement
 
-| Group Policy Setting                                               | Constant Name                             |
-| ------------------------------------------------------------------ | ----------------------------------------- |
-| Access Credential Manager as a trusted caller                      | SeTrustedCredManAccessPrivilege           |
-| Access this computer from the network                              | SeNetworkLogonRight                       |
-| Act as part of the operating system                                | SeTcbPrivilege                            |
-| Add workstations to domain                                         | SeMachineAccountPrivilege                 |
-| Adjust memory quotas for a process                                 | SeIncreaseQuotaPrivilege                  |
-| Allow log on locally                                               | SeInteractiveLogonRight                   |
-| Allow log on through Remote Desktop Services                       | SeRemoteInteractiveLogonRight             |
-| Back up files and directories                                      | SeBackupPrivilege                         |
-| Bypass traverse checking                                           | SeChangeNotifyPrivilege                   |
-| Change the system time                                             | SeSystemtimePrivilege                     |
-| Change the time zone                                               | SeTimeZonePrivilege                       |
-| Create a pagefile                                                  | SeCreatePagefilePrivilege                 |
-| Create a token object                                              | SeCreateTokenPrivilege                    |
-| Create global objects                                              | SeCreateGlobalPrivilege                   |
-| Create permanent shared objects                                    | SeCreatePermanentPrivilege                |
-| Create symbolic links                                              | SeCreateSymbolicLinkPrivilege             |
-| Debug programs                                                     | SeDebugPrivilege                          |
-| Deny access to this computer from the network                      | SeDenyNetworkLogonRight                   |
-| Deny log on as a batch job                                         | SeDenyBatchLogonRight                     |
-| Deny log on as a service                                           | SeDenyServiceLogonRight                   |
-| Deny log on locally                                                | SeDenyInteractiveLogonRight               |
-| Deny log on through Remote Desktop Services                        | SeDenyRemoteInteractiveLogonRight         |
-| Enable computer and user accounts to be trusted for delegation     | SeEnableDelegationPrivilege               |
-| Force shutdown from a remote system                                | SeRemoteShutdownPrivilege                 |
-| Generate security audits                                           | SeAuditPrivilege                          |
-| Impersonate a client after authentication                          | SeImpersonatePrivilege                    |
-| Increase a process working set                                     | SeIncreaseWorkingSetPrivilege             |
-| Increase scheduling priority                                       | SeIncreaseBasePriorityPrivilege           |
-| Load and unload device drivers                                     | SeLoadDriverPrivilege                     |
-| Lock pages in memory                                               | SeLockMemoryPrivilege                     |
-| Log on as a batch job                                              | SeBatchLogonRight                         |
-| Log on as a service                                                | SeServiceLogonRight                       |
-| Manage auditing and security log                                   | SeSecurityPrivilege                       |
-| Modify an object label                                             | SeRelabelPrivilege                        |
-| Modify firmware environment values                                 | SeSystemEnvironmentPrivilege              |
-| Obtain an impersonation token for another user in the same session | SeDelegateSessionUserImpersonatePrivilege |
-| Perform volume maintenance tasks                                   | SeManageVolumePrivilege                   |
-| Profile single process                                             | SeProfileSingleProcessPrivilege           |
-| Profile system performance                                         | SeSystemProfilePrivilege                  |
-| Remove computer from docking station                               | SeUndockPrivilege                         |
-| Replace a process level token                                      | SeAssignPrimaryTokenPrivilege             |
-| Restore files and directories                                      | SeRestorePrivilege                        |
-| Shut down the system                                               | SeShutdownPrivilege                       |
-| Synchronize directory service data                                 | SeSyncAgentPrivilege                      |
-| Take ownership of files or other objects                           | SeTakeOwnershipPrivilege                  |
+| ConstantName                              | Group Policy Setting                                               |
+| ----------------------------------------- | ------------------------------------------------------------------ |
+| SeTrustedCredManAccessPrivilege           | Access Credential Manager as a trusted caller                      |
+| SeNetworkLogonRight                       | Access this computer from the network                              |
+| SeTcbPrivilege                            | Act as part of the operating system                                |
+| SeMachineAccountPrivilege                 | Add workstations to domain                                         |
+| SeIncreaseQuotaPrivilege                  | Adjust memory quotas for a process                                 |
+| SeInteractiveLogonRight                   | Allow log on locally                                               |
+| SeRemoteInteractiveLogonRight             | Allow log on through Remote Desktop Services                       |
+| SeBackupPrivilege                         | Back up files and directories                                      |
+| SeChangeNotifyPrivilege                   | Bypass traverse checking                                           |
+| SeSystemtimePrivilege                     | Change the system time                                             |
+| SeTimeZonePrivilege                       | Change the time zone                                               |
+| SeCreatePagefilePrivilege                 | Create a pagefile                                                  |
+| SeCreateTokenPrivilege                    | Create a token object                                              |
+| SeCreateGlobalPrivilege                   | Create global objects                                              |
+| SeCreatePermanentPrivilege                | Create permanent shared objects                                    |
+| SeCreateSymbolicLinkPrivilege             | Create symbolic links                                              |
+| SeDebugPrivilege                          | Debug programs                                                     |
+| SeDenyNetworkLogonRight                   | Deny access to this computer from the network                      |
+| SeDenyBatchLogonRight                     | Deny log on as a batch job                                         |
+| SeDenyServiceLogonRight                   | Deny log on as a service                                           |
+| SeDenyInteractiveLogonRight               | Deny log on locally                                                |
+| SeDenyRemoteInteractiveLogonRight         | Deny log on through Remote Desktop Services                        |
+| SeEnableDelegationPrivilege               | Enable computer and user accounts to be trusted for delegation     |
+| SeRemoteShutdownPrivilege                 | Force shutdown from a remote system                                |
+| SeAuditPrivilege                          | Generate security audits                                           |
+| SeImpersonatePrivilege                    | Impersonate a client after authentication                          |
+| SeIncreaseWorkingSetPrivilege             | Increase a process working set                                     |
+| SeIncreaseBasePriorityPrivilege           | Increase scheduling priority                                       |
+| SeLoadDriverPrivilege                     | Load and unload device drivers                                     |
+| SeLockMemoryPrivilege                     | Lock pages in memory                                               |
+| SeBatchLogonRight                         | Log on as a batch job                                              |
+| SeServiceLogonRight                       | Log on as a service                                                |
+| SeSecurityPrivilege                       | Manage auditing and security log                                   |
+| SeRelabelPrivilege                        | Modify an object label                                             |
+| SeSystemEnvironmentPrivilege              | Modify firmware environment values                                 |
+| SeDelegateSessionUserImpersonatePrivilege | Obtain an impersonation token for another user in the same session |
+| SeManageVolumePrivilege                   | Perform volume maintenance tasks                                   |
+| SeProfileSingleProcessPrivilege           | Profile single process                                             |
+| SeSystemProfilePrivilege                  | Profile system performance                                         |
+| SeUndockPrivilege                         | Remove computer from docking station                               |
+| SeAssignPrimaryTokenPrivilege             | Replace a process level token                                      |
+| SeRestorePrivilege                        | Restore files and directories                                      |
+| SeShutdownPrivilege                       | Shut down the system                                               |
+| SeSyncAgentPrivilege                      | Synchronize directory service data                                 |
+| SeTakeOwnershipPrivilege                  | Take ownership of files or other objects                           |
 
 ### Installing
 

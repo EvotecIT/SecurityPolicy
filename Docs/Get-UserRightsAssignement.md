@@ -8,31 +8,57 @@ schema: 2.0.0
 # Get-UserRightsAssignement
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Provides a list of users assigned to a specific role.
 
 ## SYNTAX
 
+### UserRights (Default)
 ```
-Get-UserRightsAssignement [[-UserRightsAssignment] <UserRightsAssignment>] [[-Computer] <String>]
+Get-UserRightsAssignement -UserRightsAssignment <UserRightsAssignment> [-Computer <String>]
  [<CommonParameters>]
 ```
 
+### All
+```
+Get-UserRightsAssignement [-Computer <String>] [-All] [<CommonParameters>]
+```
+
 ## DESCRIPTION
-{{ Fill in the Description }}
+Provides a list of users assigned to a specific role.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Get-UserRightsAssignement -All
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+Get-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege
+```
 
 ## PARAMETERS
 
+### -UserRightsAssignment
+Choose the role to list the users assigned to.
+
+```yaml
+Type: UserRightsAssignment
+Parameter Sets: UserRights
+Aliases:
+Accepted values: SeTrustedCredManAccessPrivilege, SeNetworkLogonRight, SeTcbPrivilege, SeMachineAccountPrivilege, SeIncreaseQuotaPrivilege, SeInteractiveLogonRight, SeRemoteInteractiveLogonRight, SeBackupPrivilege, SeChangeNotifyPrivilege, SeSystemtimePrivilege, SeTimeZonePrivilege, SeCreatePagefilePrivilege, SeCreateTokenPrivilege, SeCreateGlobalPrivilege, SeCreatePermanentPrivilege, SeCreateSymbolicLinkPrivilege, SeDebugPrivilege, SeDenyNetworkLogonRight, SeDenyBatchLogonRight, SeDenyServiceLogonRight, SeDenyInteractiveLogonRight, SeDenyRemoteInteractiveLogonRight, SeEnableDelegationPrivilege, SeRemoteShutdownPrivilege, SeAuditPrivilege, SeImpersonatePrivilege, SeIncreaseWorkingSetPrivilege, SeIncreaseBasePriorityPrivilege, SeLoadDriverPrivilege, SeLockMemoryPrivilege, SeBatchLogonRight, SeServiceLogonRight, SeSecurityPrivilege, SeRelabelPrivilege, SeSystemEnvironmentPrivilege, SeDelegateSessionUserImpersonatePrivilege, SeManageVolumePrivilege, SeProfileSingleProcessPrivilege, SeSystemProfilePrivilege, SeUndockPrivilege, SeAssignPrimaryTokenPrivilege, SeRestorePrivilege, SeShutdownPrivilege, SeSyncAgentPrivilege, SeTakeOwnershipPrivilege
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Computer
-{{ Fill Computer Description }}
+Choose computer name.
+If not specified, the current computer will be used.
 
 ```yaml
 Type: String
@@ -40,24 +66,23 @@ Parameter Sets: (All)
 Aliases: ComputerName
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserRightsAssignment
-{{ Fill UserRightsAssignment Description }}
+### -All
+Get all users for all user rights assignment for the specified computer.
 
 ```yaml
-Type: UserRightsAssignment
-Parameter Sets: (All)
+Type: SwitchParameter
+Parameter Sets: All
 Aliases:
-Accepted values: SeTrustedCredManAccessPrivilege, SeNetworkLogonRight, SeTcbPrivilege, SeMachineAccountPrivilege, SeIncreaseQuotaPrivilege, SeInteractiveLogonRight, SeRemoteInteractiveLogonRight, SeBackupPrivilege, SeChangeNotifyPrivilege, SeSystemtimePrivilege, SeTimeZonePrivilege, SeCreatePagefilePrivilege, SeCreateTokenPrivilege, SeCreateGlobalPrivilege, SeCreatePermanentPrivilege, SeCreateSymbolicLinkPrivilege, SeDebugPrivilege, SeDenyNetworkLogonRight, SeDenyBatchLogonRight, SeDenyServiceLogonRight, SeDenyInteractiveLogonRight, SeDenyRemoteInteractiveLogonRight, SeEnableDelegationPrivilege, SeRemoteShutdownPrivilege, SeAuditPrivilege, SeImpersonatePrivilege, SeIncreaseWorkingSetPrivilege, SeIncreaseBasePriorityPrivilege, SeLoadDriverPrivilege, SeLockMemoryPrivilege, SeBatchLogonRight, SeServiceLogonRight, SeSecurityPrivilege, SeRelabelPrivilege, SeSystemEnvironmentPrivilege, SeDelegateSessionUserImpersonatePrivilege, SeManageVolumePrivilege, SeProfileSingleProcessPrivilege, SeSystemProfilePrivilege, SeUndockPrivilege, SeAssignPrimaryTokenPrivilege, SeRestorePrivilege, SeShutdownPrivilege, SeSyncAgentPrivilege, SeTakeOwnershipPrivilege
 
 Required: False
-Position: 0
-Default value: None
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -67,11 +92,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+General notes
 
 ## RELATED LINKS

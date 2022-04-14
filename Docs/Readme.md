@@ -12,11 +12,11 @@ Locale: en-US
 
 ## SecurityPolicy Cmdlets
 ### [Add-UserRightsAssignement](Add-UserRightsAssignement.md)
-{{ Fill in the Description }}
+Short description
 
 ### [Get-UserRightsAssignement](Get-UserRightsAssignement.md)
-{{ Fill in the Description }}
+Provides a list of users assigned to a specific role.
 
 ### [Remove-UserRightsAssignement](Remove-UserRightsAssignement.md)
-{{ Fill in the Description }}
+Remove identity object from User Rights Assignment Local Security Policy
 
