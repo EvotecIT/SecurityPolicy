@@ -25,6 +25,7 @@
 
 Provides a way to configure **user rights assignments** in local security policies using PowerShell without using `secedit.exe`.
 This module is alternative to [SecurityPolicyDSC](https://github.com/dsccommunity/SecurityPolicyDsc) which uses a wrapper around secedit.exe.
+This module is based on [LocalSecurityEditor](https://github.com/EvotecIT/LocalSecurityEditor) .NET Library.
 
 ### Supported User Rights Assignement
 
