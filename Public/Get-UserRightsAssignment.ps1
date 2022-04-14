@@ -7,10 +7,10 @@
     Provides a list of users assigned to a specific role.
 
     .PARAMETER UserRightsAssignment
-    Get all users for specific user rights assignment for specified computer.
+    Choose the role to list the users assigned to.
 
     .PARAMETER Computer
-    Parameter description
+    Choose computer name. If not specified, the current computer will be used.
 
     .PARAMETER All
     Get all users for all user rights assignment for the specified computer.
@@ -26,16 +26,16 @@
     #>
     [cmdletBinding(DefaultParameterSetName = 'UserRights')]
     param(
-        [parameter(Mandatory, ParameterSetName = 'UserRights')][SecurityEditor.UserRightsAssignment] $UserRightsAssignment,
+        [parameter(Mandatory, ParameterSetName = 'UserRights')][LocalSecurityEditor.UserRightsAssignment] $UserRightsAssignment,
         [alias('ComputerName')][string] $Computer,
         [parameter(ParameterSetName = 'All')][switch] $All
     )
 
     try {
         if ($Computer) {
-            $LsaWrapper = [SecurityEditor.LsaWrapper]::new($Computer)
+            $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new($Computer)
         } else {
-            $LsaWrapper = [SecurityEditor.LsaWrapper]::new()
+            $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new()
         }
     } catch {
         if ($PSBoundParameters.ErrorAction -eq 'Stop') {
@@ -48,7 +48,7 @@
     }
     if ($All) {
         $Output = [ordered] @{}
-        $EnumValues = [Enum]::GetNames([SecurityEditor.UserRightsAssignment])
+        $EnumValues = [Enum]::GetNames([LocalSecurityEditor.UserRightsAssignment])
         foreach ($Value in $EnumValues | Sort-Object) {
             $Output[$Value] = try {
                 $LsaWrapper.GetPrivileges($Value)

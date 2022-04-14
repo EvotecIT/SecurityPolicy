@@ -6,6 +6,11 @@ $Configuration = @{
     Information = @{
         ModuleName        = 'SecurityPolicy'
         DirectoryProjects = 'C:\Support\GitHub'
+
+        LibrariesCore     = 'Lib\Core'
+        LibrariesDefault  = 'Lib\Default'
+        LibrariesStandard = 'Lib\Standard'
+
         Manifest          = @{
             # Version number of this module.
             ModuleVersion        = '0.0.1'
@@ -20,12 +25,12 @@ $Configuration = @{
             # Copyright statement for this module
             Copyright            = "(c) 2011 - $((Get-Date).Year) Przemyslaw Klys @ Evotec. All rights reserved."
             # Description of the functionality provided by this module
-            Description          = 'Module that uses secedit.exe'
+            Description          = 'Module that allows getting, adding and removing User Rights Assignment without using secedit.exe'
             # Minimum version of the Windows PowerShell engine required by this module
             PowerShellVersion    = '5.1'
             # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
             # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-            Tags                 = @('Windows', 'Secedit', "Policies")
+            Tags                 = @('Windows', 'Secedit', "Policies", "UserRightsAssignment" )
             #IconUri              = 'https://evotec.xyz/wp-content/uploads/2018/10/PSSharedGoods-Alternative.png'
             ProjectUri           = 'https://github.com/EvotecIT/SecurityPolicy'
             RequiredModules      = @(
