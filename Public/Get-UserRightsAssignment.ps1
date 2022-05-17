@@ -51,7 +51,10 @@
         $EnumValues = [Enum]::GetNames([LocalSecurityEditor.UserRightsAssignment])
         foreach ($Value in $EnumValues | Sort-Object) {
             $Output[$Value] = try {
-                $LsaWrapper.GetPrivileges($Value)
+                $PriviligeOutput = $LsaWrapper.GetPrivileges($Value)
+                foreach ($P in $PriviligeOutput) {
+                    Convert-Identity -Identity $P
+                }
             } catch {
                 if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                     Write-Error "Could not get privileges for $Value. Error: $($_.Exception.Message)"
@@ -64,7 +67,10 @@
         $Output
     } else {
         try {
-            $LsaWrapper.GetPrivileges($UserRightsAssignment)
+            $PriviligeOutput = $LsaWrapper.GetPrivileges($UserRightsAssignment)
+            foreach ($P in $PriviligeOutput) {
+                Convert-Identity -Identity $P
+            }
         } catch {
             if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                 Write-Error "Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
