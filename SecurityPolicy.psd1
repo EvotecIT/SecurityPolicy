@@ -6,9 +6,9 @@
     CompatiblePSEditions = @('Desktop', 'Core')
     Copyright            = '(c) 2011 - 2022 Przemyslaw Klys @ Evotec. All rights reserved.'
     Description          = 'Module that allows getting, adding and removing User Rights Assignment without using secedit.exe'
-    FunctionsToExport    = @('Add-UserRightsAssignement', 'Get-UserRightsAssignement', 'Remove-UserRightsAssignement')
+    FunctionsToExport    = @('Add-UserRightsAssignement', 'Get-UserRightsAssignement', 'Remove-UserRightsAssignement', 'Set-UserRightsAssignement')
     GUID                 = '0e3eaa53-5e0b-4f10-9375-d6a0a9a1eb45'
-    ModuleVersion        = '0.0.1'
+    ModuleVersion        = '0.0.2'
     PowerShellVersion    = '5.1'
     PrivateData          = @{
         PSData = @{
