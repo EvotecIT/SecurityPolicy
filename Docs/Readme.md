@@ -20,3 +20,6 @@ Provides a list of users assigned to a specific role.
 ### [Remove-UserRightsAssignement](Remove-UserRightsAssignement.md)
 Remove identity object from User Rights Assignment Local Security Policy
 
+### [Set-UserRightsAssignement](Set-UserRightsAssignement.md)
+{{ Fill in the Synopsis }}
+
