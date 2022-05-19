@@ -5,41 +5,51 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-UserRightsAssignement
+# Get-UserRightsAssignment
 
 ## SYNOPSIS
-Remove identity object from User Rights Assignment Local Security Policy
+Provides a list of users assigned to a specific role.
 
 ## SYNTAX
 
+### UserRights (Default)
 ```
-Remove-UserRightsAssignement [-UserRightsAssignment] <UserRightsAssignment> [[-Computer] <String>]
- [-Identity] <String> [-Suppress] [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-UserRightsAssignment -UserRightsAssignment <UserRightsAssignment> [-Computer <String>] [<CommonParameters>]
+```
+
+### All
+```
+Get-UserRightsAssignment [-Computer <String>] [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Remove identity object from User Rights Assignment Local Security Policy
+Provides a list of users assigned to a specific role.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
+Get-UserRightsAssignment -All
+```
+
+### EXAMPLE 2
+```
+Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege
 ```
 
 ## PARAMETERS
 
 ### -UserRightsAssignment
-Choose user rights assignment
+Choose the role to list the users assigned to.
 
 ```yaml
 Type: UserRightsAssignment
-Parameter Sets: (All)
+Parameter Sets: UserRights
 Aliases:
 Accepted values: SeTrustedCredManAccessPrivilege, SeNetworkLogonRight, SeTcbPrivilege, SeMachineAccountPrivilege, SeIncreaseQuotaPrivilege, SeInteractiveLogonRight, SeRemoteInteractiveLogonRight, SeBackupPrivilege, SeChangeNotifyPrivilege, SeSystemtimePrivilege, SeTimeZonePrivilege, SeCreatePagefilePrivilege, SeCreateTokenPrivilege, SeCreateGlobalPrivilege, SeCreatePermanentPrivilege, SeCreateSymbolicLinkPrivilege, SeDebugPrivilege, SeDenyNetworkLogonRight, SeDenyBatchLogonRight, SeDenyServiceLogonRight, SeDenyInteractiveLogonRight, SeDenyRemoteInteractiveLogonRight, SeEnableDelegationPrivilege, SeRemoteShutdownPrivilege, SeAuditPrivilege, SeImpersonatePrivilege, SeIncreaseWorkingSetPrivilege, SeIncreaseBasePriorityPrivilege, SeLoadDriverPrivilege, SeLockMemoryPrivilege, SeBatchLogonRight, SeServiceLogonRight, SeSecurityPrivilege, SeRelabelPrivilege, SeSystemEnvironmentPrivilege, SeManageVolumePrivilege, SeProfileSingleProcessPrivilege, SeSystemProfilePrivilege, SeUndockPrivilege, SeAssignPrimaryTokenPrivilege, SeRestorePrivilege, SeShutdownPrivilege, SeSyncAgentPrivilege, SeTakeOwnershipPrivilege, SeDelegateSessionUserImpersonatePrivilege
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -55,69 +65,23 @@ Parameter Sets: (All)
 Aliases: ComputerName
 
 Required: False
-Position: 2
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Identity
-Provide the user name to remove the user rights assignment for
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: UserName
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Suppress
-Suppress the output. By default returns the identity what happend as an object.
+### -All
+Get all users for all user rights assignment for the specified computer.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: All
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

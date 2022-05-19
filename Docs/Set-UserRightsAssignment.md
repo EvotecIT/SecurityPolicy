@@ -5,34 +5,43 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-UserRightsAssignement
+# Set-UserRightsAssignment
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Overwrites current user rights assignment with the specified identities.
 
 ## SYNTAX
 
 ```
-Set-UserRightsAssignement -UserRightsAssignment <UserRightsAssignment> [-Computer <String>]
+Set-UserRightsAssignment -UserRightsAssignment <UserRightsAssignment> [-Computer <String>]
  [-Identity <String[]>] [-Suppress] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Overwrites current user rights assignment with the specified identities.
+It does so by adding only missing rights, and removing the ones that require removal.
+Identies that don't require changing are left as is.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+$Identity = @(
 ```
 
-{{ Add example description here }}
+'BUILTIN\Backup Operators'
+    'BUILTIN\Administrators'
+    'Guest'
+    'BUILTIN\Users'
+    'przemyslaw.klys'
+)
+
+Set-UserRightsAssignment-UserRightsAssignment SeBackupPrivilege -Identity $Identity -WhatIf
 
 ## PARAMETERS
 
 ### -UserRightsAssignment
-{{ Fill UserRightsAssignment Description }}
+Choose user rights assignment
 
 ```yaml
 Type: UserRightsAssignment
@@ -48,7 +57,8 @@ Accept wildcard characters: False
 ```
 
 ### -Computer
-{{ Fill Computer Description }}
+Choose computer name.
+If not specified, the current computer will be used.
 
 ```yaml
 Type: String
@@ -63,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Identity
-{{ Fill Identity Description }}
+Provide the identities to set the user rights assignment for
 
 ```yaml
 Type: String[]
@@ -78,7 +88,8 @@ Accept wildcard characters: False
 ```
 
 ### -Suppress
-Suppress the output. By default returns the identity what happend as an object.
+Suppress the output.
+By default returns the identity what happend as an object.
 
 ```yaml
 Type: SwitchParameter
@@ -93,7 +104,8 @@ Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: SwitchParameter
@@ -127,11 +139,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+General notes
 
 ## RELATED LINKS

@@ -11,15 +11,15 @@ Locale: en-US
 {{ Fill in the Description }}
 
 ## SecurityPolicy Cmdlets
-### [Add-UserRightsAssignement](Add-UserRightsAssignement.md)
-Short description
+### [Add-UserRightsAssignment](Add-UserRightsAssignment.md)
+Add identity object to the specified user rights Assignment role.
 
-### [Get-UserRightsAssignement](Get-UserRightsAssignement.md)
+### [Get-UserRightsAssignment](Get-UserRightsAssignment.md)
 Provides a list of users assigned to a specific role.
 
-### [Remove-UserRightsAssignement](Remove-UserRightsAssignement.md)
-Remove identity object from User Rights Assignment Local Security Policy
+### [Remove-UserRightsAssignment](Remove-UserRightsAssignment.md)
+Remove identity object from User Rights Assignment role
 
-### [Set-UserRightsAssignement](Set-UserRightsAssignement.md)
-{{ Fill in the Synopsis }}
+### [Set-UserRightsAssignment](Set-UserRightsAssignment.md)
+Overwrites current user rights assignment with the specified identities.
 

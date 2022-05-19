@@ -5,26 +5,26 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-UserRightsAssignement
+# Remove-UserRightsAssignment
 
 ## SYNOPSIS
-Short description
+Remove identity object from User Rights Assignment role
 
 ## SYNTAX
 
 ```
-Add-UserRightsAssignement [-UserRightsAssignment] <UserRightsAssignment> [[-Computer] <String>]
+Remove-UserRightsAssignment [-UserRightsAssignment] <UserRightsAssignment> [[-Computer] <String>]
  [-Identity] <String> [-Suppress] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Long description
+Remove identity object from User Rights Assignment role
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Add-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
+Remove-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
 ```
 
 ## PARAMETERS
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Identity
-Parameter description
+Provide the user name to remove the user rights assignment for
 
 ```yaml
 Type: String
@@ -77,7 +77,8 @@ Accept wildcard characters: False
 ```
 
 ### -Suppress
-{{ Fill Suppress Description }}
+Suppress the output.
+By default returns the identity what happend as an object.
 
 ```yaml
 Type: SwitchParameter
