@@ -1,4 +1,4 @@
-﻿function Get-UserRightsAssignement {
+﻿function Get-UserRightsAssignment {
     <#
     .SYNOPSIS
     Provides a list of users assigned to a specific role.
@@ -16,10 +16,10 @@
     Get all users for all user rights assignment for the specified computer.
 
     .EXAMPLE
-    Get-UserRightsAssignement -All
+    Get-UserRightsAssignment -All
 
     .EXAMPLE
-    Get-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege
+    Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege
 
     .NOTES
     General notes
@@ -42,7 +42,7 @@
             Write-Error "Could not create LsaWrapper. Error: $($_.Exception.Message)"
             return
         } else {
-            Write-Warning -Message "Get-UserRightsAssignement - Could not create LsaWrapper. Error: $($_.Exception.Message)"
+            Write-Warning -Message "Get-UserRightsAssignment - Could not create LsaWrapper. Error: $($_.Exception.Message)"
             return
         }
     }
@@ -58,7 +58,7 @@
                     Write-Error "Could not get privileges for $Value. Error: $($_.Exception.Message)"
                     return
                 } else {
-                    Write-Warning -Message "Get-UserRightsAssignement - Could not get privileges for $Value. Error: $($_.Exception.Message)"
+                    Write-Warning -Message "Get-UserRightsAssignment - Could not get privileges for $Value. Error: $($_.Exception.Message)"
                 }
             }
             $Output[$Value] = foreach ($P in $PriviligeOutput) {
@@ -74,7 +74,7 @@
                 Write-Error "Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
             } else {
-                Write-Warning -Message "Get-UserRightsAssignement - Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
+                Write-Warning -Message "Get-UserRightsAssignment - Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
             }
         }
         foreach ($P in $PriviligeOutput) {
@@ -88,7 +88,7 @@
             Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
             return
         } else {
-            Write-Warning -Message "Get-UserRightsAssignement - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+            Write-Warning -Message "Get-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
             return
         }
     }

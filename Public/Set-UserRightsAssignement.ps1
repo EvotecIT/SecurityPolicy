@@ -1,4 +1,4 @@
-﻿function Set-UserRightsAssignement {
+﻿function Set-UserRightsAssignment {
     <#
     .SYNOPSIS
     Overwrites current user rights assignment with the specified identities.
@@ -29,7 +29,7 @@
         'przemyslaw.klys'
     )
 
-    Set-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity $Identity -WhatIf
+    Set-UserRightsAssignment-UserRightsAssignment SeBackupPrivilege -Identity $Identity -WhatIf
 
     .NOTES
     General notes
@@ -48,7 +48,7 @@
         Convert-Identity -Identity $I
     }
 
-    $CurrentSettings = Get-UserRightsAssignement -UserRightsAssignment $UserRightsAssignment -Computer $Computer
+    $CurrentSettings = Get-UserRightsAssignment -UserRightsAssignment $UserRightsAssignment -Computer $Computer
 
     foreach ($I in $ConvertedIdentities.Name) {
         if ($I -in $CurrentSettings.Name) {
@@ -65,10 +65,10 @@
 
     foreach ($Action in $ToDo.Keys) {
         if ($ToDo[$Action] -eq 'Add') {
-            $DidItWork = Add-UserRightsAssignement -UserRightsAssignment $UserRightsAssignment -Computer $Computer -Identity $Action
+            $DidItWork = Add-UserRightsAssignment -UserRightsAssignment $UserRightsAssignment -Computer $Computer -Identity $Action
             $WhatHappend[$Action] = $DidItWork
         } elseif ($ToDo[$Action] -eq 'Remove') {
-            $DidItWork = Remove-UserRightsAssignement -UserRightsAssignment $UserRightsAssignment -Computer $Computer -Identity $Action
+            $DidItWork = Remove-UserRightsAssignment -UserRightsAssignment $UserRightsAssignment -Computer $Computer -Identity $Action
             $WhatHappend[$Action] = $DidItWork
         } elseif ($ToDo[$Action] -eq 'DoNothing') {
             $WhatHappend[$Action] = [PSCustomObject] @{

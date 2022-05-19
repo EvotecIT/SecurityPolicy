@@ -1,4 +1,4 @@
-﻿function Remove-UserRightsAssignement {
+﻿function Remove-UserRightsAssignment {
     <#
     .SYNOPSIS
     Remove identity object from User Rights Assignment role
@@ -19,7 +19,7 @@
     Suppress the output. By default returns the identity what happend as an object.
 
     .EXAMPLE
-    Remove-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
+    Remove-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
 
     .NOTES
     General notes
@@ -55,11 +55,11 @@
             Write-Error "Could not create LsaWrapper. Error: $($_.Exception.Message)"
             return
         } else {
-            Write-Warning -Message "Remove-UserRightsAssignement - Could not create LsaWrapper. Error: $($_.Exception.Message)"
+            Write-Warning -Message "Remove-UserRightsAssignment - Could not create LsaWrapper. Error: $($_.Exception.Message)"
             return
         }
     }
-    if ($PSCmdlet.ShouldProcess("Removing $($ConvertedIdentity.Name)/$($ConvertedIdentity.Sid) from $UserRightsAssignment", 'Add-UserRightsAssignement')) {
+    if ($PSCmdlet.ShouldProcess("Removing $($ConvertedIdentity.Name)/$($ConvertedIdentity.Sid) from $UserRightsAssignment", 'Add-UserRightsAssignment')) {
         try {
             $LsaWrapper.RemovePrivileges($ConvertedIdentity.Name, $UserRightsAssignment)
             if (-not $Suppress) {
@@ -87,7 +87,7 @@
                 Write-Error "Could not remove privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
             } else {
-                Write-Warning -Message "Remove-UserRightsAssignement - Could not remove privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
+                Write-Warning -Message "Remove-UserRightsAssignment - Could not remove privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
             }
         }
@@ -110,7 +110,7 @@
             Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
             return
         } else {
-            Write-Warning -Message "Remove-UserRightsAssignement - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+            Write-Warning -Message "Remove-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
             return
         }
     }
