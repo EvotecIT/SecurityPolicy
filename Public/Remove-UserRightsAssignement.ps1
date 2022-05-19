@@ -15,6 +15,9 @@
     .PARAMETER Identity
     Provide the user name to remove the user rights assignment for
 
+    .PARAMETER Suppress
+    Suppress the output. By default returns the identity what happend as an object.
+
     .EXAMPLE
     Remove-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
 
@@ -25,8 +28,11 @@
     param(
         [parameter(Mandatory)][LocalSecurityEditor.UserRightsAssignment] $UserRightsAssignment,
         [alias('ComputerName')][string] $Computer,
-        [parameter(Mandatory)][alias('UserName')][string] $Identity
+        [parameter(Mandatory)][alias('UserName')][string] $Identity,
+        [switch] $Suppress
     )
+
+    $ConvertedIdentity = Convert-Identity -Identity $Identity
 
     try {
         if ($Computer) {
@@ -35,6 +41,16 @@
             $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new()
         }
     } catch {
+        if (-not $Suppress) {
+            [PSCustomObject] @{
+                "Action"               = 'Remove'
+                "Identity"             = $ConvertedIdentity.Name
+                'SID'                  = $ConvertedIdentity.Sid
+                "UserRightsAssignment" = $UserRightsAssignment
+                "Status"               = 'Failed'
+                "Error"                = $($_.Exception.Message)
+            }
+        }
         if ($PSBoundParameters.ErrorAction -eq 'Stop') {
             Write-Error "Could not create LsaWrapper. Error: $($_.Exception.Message)"
             return
@@ -43,16 +59,47 @@
             return
         }
     }
-    if ($PSCmdlet.ShouldProcess("Removing $Identity from $UserRightsAssignment", 'Add-UserRightsAssignement')) {
+    if ($PSCmdlet.ShouldProcess("Removing $($ConvertedIdentity.Name)/$($ConvertedIdentity.Sid) from $UserRightsAssignment", 'Add-UserRightsAssignement')) {
         try {
-            $LsaWrapper.RemovePrivileges($Identity, $UserRightsAssignment)
+            $LsaWrapper.RemovePrivileges($ConvertedIdentity.Name, $UserRightsAssignment)
+            if (-not $Suppress) {
+                [PSCustomObject] @{
+                    "Action"               = 'Remove'
+                    "Identity"             = $ConvertedIdentity.Name
+                    'SID'                  = $ConvertedIdentity.Sid
+                    "UserRightsAssignment" = $UserRightsAssignment
+                    "Status"               = 'Success'
+                    "Error"                = ''
+                }
+            }
         } catch {
+            if (-not $Suppress) {
+                [PSCustomObject] @{
+                    "Action"               = 'Remove'
+                    "Identity"             = $ConvertedIdentity.Name
+                    'SID'                  = $ConvertedIdentity.Sid
+                    "UserRightsAssignment" = $UserRightsAssignment
+                    "Status"               = 'Failed'
+                    "Error"                = $($_.Exception.Message)
+                }
+            }
             if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                 Write-Error "Could not remove privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
             } else {
                 Write-Warning -Message "Remove-UserRightsAssignement - Could not remove privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
+            }
+        }
+    } else {
+        if (-not $Suppress) {
+            [PSCustomObject] @{
+                "Action"               = 'Remove'
+                "Identity"             = $ConvertedIdentity.Name
+                'SID'                  = $ConvertedIdentity.Sid
+                "UserRightsAssignment" = $UserRightsAssignment
+                "Status"               = 'WhatIf'
+                "Error"                = 'WhatIf in use.'
             }
         }
     }

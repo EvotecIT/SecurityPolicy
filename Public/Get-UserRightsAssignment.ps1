@@ -50,12 +50,10 @@
         $Output = [ordered] @{}
         $EnumValues = [Enum]::GetNames([LocalSecurityEditor.UserRightsAssignment])
         foreach ($Value in $EnumValues | Sort-Object) {
-            $Output[$Value] = try {
+            try {
                 $PriviligeOutput = $LsaWrapper.GetPrivileges($Value)
-                foreach ($P in $PriviligeOutput) {
-                    Convert-Identity -Identity $P
-                }
             } catch {
+                $PriviligeOutput = $null
                 if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                     Write-Error "Could not get privileges for $Value. Error: $($_.Exception.Message)"
                     return
@@ -63,14 +61,14 @@
                     Write-Warning -Message "Get-UserRightsAssignement - Could not get privileges for $Value. Error: $($_.Exception.Message)"
                 }
             }
+            $Output[$Value] = foreach ($P in $PriviligeOutput) {
+                Convert-Identity -Identity $P
+            }
         }
         $Output
     } else {
         try {
             $PriviligeOutput = $LsaWrapper.GetPrivileges($UserRightsAssignment)
-            foreach ($P in $PriviligeOutput) {
-                Convert-Identity -Identity $P
-            }
         } catch {
             if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                 Write-Error "Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
@@ -78,6 +76,9 @@
             } else {
                 Write-Warning -Message "Get-UserRightsAssignement - Could not get privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
             }
+        }
+        foreach ($P in $PriviligeOutput) {
+            Convert-Identity -Identity $P
         }
     }
     try {

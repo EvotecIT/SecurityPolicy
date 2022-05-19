@@ -15,6 +15,9 @@
     .PARAMETER Identity
     Choose identity object by providing it's full name
 
+    .PARAMETER Suppress
+    Suppress the output. By default returns the identity what happend as an object.
+
     .EXAMPLE
     Add-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
 
@@ -25,34 +28,77 @@
     param(
         [parameter(Mandatory)][LocalSecurityEditor.UserRightsAssignment] $UserRightsAssignment,
         [alias('ComputerName')][string] $Computer,
-        [parameter(Mandatory)][alias('UserName')][string] $Identity
+        [parameter(Mandatory)][alias('UserName')][string] $Identity,
+        [switch] $Suppress
     )
 
-    try {
-        if ($Computer) {
-            $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new($Computer)
-        } else {
-            $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new()
-        }
-    } catch {
-        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
-            Write-Error "Could not create LsaWrapper. Error: $($_.Exception.Message)"
-            return
-        } else {
-            Write-Warning -Message "Add-UserRightsAssignement - Could not create LsaWrapper. Error: $($_.Exception.Message)"
-            return
-        }
-    }
-    if ($PSCmdlet.ShouldProcess("Adding $Identity to $UserRightsAssignment", 'Add-UserRightsAssignement')) {
+    $ConvertedIdentity = Convert-Identity -Identity $Identity
+
+    if ($PSCmdlet.ShouldProcess("Adding $($ConvertedIdentity.Name)/$($ConvertedIdentity.Sid) to $UserRightsAssignment", 'Add-UserRightsAssignement')) {
         try {
-            $LsaWrapper.AddPrivileges($Identity, $UserRightsAssignment)
+            if ($Computer) {
+                $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new($Computer)
+            } else {
+                $LsaWrapper = [LocalSecurityEditor.LsaWrapper]::new()
+            }
         } catch {
+            if (-not $Suppress) {
+                [PSCustomObject] @{
+                    "Action"               = 'Add'
+                    "Identity"             = $ConvertedIdentity.Name
+                    'SID'                  = $ConvertedIdentity.Sid
+                    "UserRightsAssignment" = $UserRightsAssignment
+                    "Status"               = 'Failed'
+                    "Error"                = $($_.Exception.Message)
+                }
+            }
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                Write-Error "Could not create LsaWrapper. Error: $($_.Exception.Message)"
+                return
+            } else {
+                Write-Warning -Message "Add-UserRightsAssignement - Could not create LsaWrapper. Error: $($_.Exception.Message)"
+                return
+            }
+        }
+        try {
+            $null = $LsaWrapper.AddPrivileges($ConvertedIdentity.Name, $UserRightsAssignment)
+            if (-not $Suppress) {
+                [PSCustomObject] @{
+                    "Action"               = 'Add'
+                    "Identity"             = $ConvertedIdentity.Name
+                    'SID'                  = $ConvertedIdentity.Sid
+                    "UserRightsAssignment" = $UserRightsAssignment
+                    "Status"               = 'Success'
+                    "Error"                = ''
+                }
+            }
+        } catch {
+            if (-not $Suppress) {
+                [PSCustomObject] @{
+                    "Action"               = 'Add'
+                    "Identity"             = $ConvertedIdentity.Name
+                    'SID'                  = $ConvertedIdentity.Sid
+                    "UserRightsAssignment" = $UserRightsAssignment
+                    "Status"               = 'Failed'
+                    "Error"                = $($_.Exception.Message)
+                }
+            }
             if ($PSBoundParameters.ErrorAction -eq 'Stop') {
                 Write-Error "Could not add privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
                 return
             } else {
                 Write-Warning -Message "Add-UserRightsAssignement - Could not add privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
-                return
+            }
+        }
+    } else {
+        if (-not $Suppress) {
+            [PSCustomObject] @{
+                "Action"               = 'Add'
+                "Identity"             = $ConvertedIdentity.Name
+                'SID'                  = $ConvertedIdentity.Sid
+                "UserRightsAssignment" = $UserRightsAssignment
+                "Status"               = 'WhatIf'
+                "Error"                = 'WhatIf in use.'
             }
         }
     }
@@ -61,10 +107,8 @@
     } catch {
         if ($PSBoundParameters.ErrorAction -eq 'Stop') {
             Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
-            return
         } else {
             Write-Warning -Message "Add-UserRightsAssignement - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
-            return
         }
     }
 }
