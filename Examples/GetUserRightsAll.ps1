@@ -1,6 +1,6 @@
 ﻿Import-Module .\SecurityPolicy.psd1 -Force
 
-$Output = Get-UserRightsAssignement -All
+$Output = Get-UserRightsAssignment -All
 $Output | Format-Table
 
 # requires PSWriteHTML

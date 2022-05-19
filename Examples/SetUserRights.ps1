@@ -1,7 +1,7 @@
 ﻿Clear-Host
 Import-Module .\SecurityPolicy.psd1 -Force
 
-$Output = Get-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
 $Output | Format-Table
 
 $Identity = @(
@@ -12,7 +12,7 @@ $Identity = @(
     #'przemyslaw.klys'
 )
 
-Set-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege -Identity $Identity #-WhatIf #-Computer AD1
+Set-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity $Identity #-WhatIf #-Computer AD1
 
-$Output = Get-UserRightsAssignement -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
 $Output | Format-Tablea
