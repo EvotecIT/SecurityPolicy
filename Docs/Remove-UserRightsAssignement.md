@@ -14,7 +14,7 @@ Remove identity object from User Rights Assignment Local Security Policy
 
 ```
 Remove-UserRightsAssignement [-UserRightsAssignment] <UserRightsAssignment> [[-Computer] <String>]
- [-Identity] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Identity] <String> [-Suppress] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,6 +72,21 @@ Aliases: UserName
 Required: True
 Position: 3
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Suppress
+Suppress the output. By default returns the identity what happend as an object.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
