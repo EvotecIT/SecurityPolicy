@@ -90,6 +90,15 @@
                 Write-Warning -Message "Add-UserRightsAssignment - Could not add privileges for $UserRightsAssignment. Error: $($_.Exception.Message)"
             }
         }
+        try {
+            $LsaWrapper.Dispose()
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+            } else {
+                Write-Warning -Message "Add-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+            }
+        }
     } else {
         if (-not $Suppress) {
             [PSCustomObject] @{
@@ -100,15 +109,6 @@
                 "Status"               = 'WhatIf'
                 "Error"                = 'WhatIf in use.'
             }
-        }
-    }
-    try {
-        $LsaWrapper.Dispose()
-    } catch {
-        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
-            Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
-        } else {
-            Write-Warning -Message "Add-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
         }
     }
 }

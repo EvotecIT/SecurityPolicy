@@ -91,6 +91,17 @@
                 return
             }
         }
+        try {
+            $LsaWrapper.Dispose()
+        } catch {
+            if ($PSBoundParameters.ErrorAction -eq 'Stop') {
+                Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+                return
+            } else {
+                Write-Warning -Message "Remove-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
+                return
+            }
+        }
     } else {
         if (-not $Suppress) {
             [PSCustomObject] @{
@@ -101,17 +112,6 @@
                 "Status"               = 'WhatIf'
                 "Error"                = 'WhatIf in use.'
             }
-        }
-    }
-    try {
-        $LsaWrapper.Dispose()
-    } catch {
-        if ($PSBoundParameters.ErrorAction -eq 'Stop') {
-            Write-Error "Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
-            return
-        } else {
-            Write-Warning -Message "Remove-UserRightsAssignment - Could not dispose LsaWrapper. Error: $($_.Exception.Message)"
-            return
         }
     }
 }
