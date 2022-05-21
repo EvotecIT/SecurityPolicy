@@ -12,7 +12,7 @@ $Identity = @(
     #'przemyslaw.klys'
 )
 
-Set-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity $Identity #-WhatIf #-Computer AD1
+Set-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity $Identity -WhatIf #-Computer AD1
 
 $Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
-$Output | Format-Tablea
+$Output | Format-Table
