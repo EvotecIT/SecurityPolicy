@@ -71,10 +71,11 @@
             $DidItWork = Remove-UserRightsAssignment -UserRightsAssignment $UserRightsAssignment -Computer $Computer -Identity $Action
             $WhatHappend[$Action] = $DidItWork
         } elseif ($ToDo[$Action] -eq 'DoNothing') {
+            $DoNothingIdentity = Convert-Identity -Identity $I
             $WhatHappend[$Action] = [PSCustomObject] @{
                 "Action"               = 'Nothing'
-                "Identity"             = $ConvertedIdentity.Name
-                'SID'                  = $ConvertedIdentity.Sid
+                "Identity"             = $Action
+                'SID'                  = $DoNothingIdentity.Sid
                 "UserRightsAssignment" = $UserRightsAssignment
                 "Status"               = 'NoAction'
                 "Error"                = ''
