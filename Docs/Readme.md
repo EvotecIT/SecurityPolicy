@@ -14,11 +14,17 @@ Locale: en-US
 ### [Add-UserRightsAssignment](Add-UserRightsAssignment.md)
 Add identity object to the specified user rights Assignment role.
 
+### [Get-SecurityPolicy](Get-SecurityPolicy.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-UserRightsAssignment](Get-UserRightsAssignment.md)
 Provides a list of users assigned to a specific role.
 
 ### [Remove-UserRightsAssignment](Remove-UserRightsAssignment.md)
 Remove identity object from User Rights Assignment role
+
+### [Set-SecurityPolicy](Set-SecurityPolicy.md)
+{{ Fill in the Synopsis }}
 
 ### [Set-UserRightsAssignment](Set-UserRightsAssignment.md)
 Overwrites current user rights assignment with the specified identities.
