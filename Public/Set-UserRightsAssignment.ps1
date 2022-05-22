@@ -73,7 +73,7 @@
         } elseif ($ToDo[$Action] -eq 'DoNothing') {
             $DoNothingIdentity = Convert-Identity -Identity $I
             $WhatHappend[$Action] = [PSCustomObject] @{
-                "Action"               = 'Nothing'
+                "Action"               = 'DoNothing'
                 "Identity"             = $Action
                 'SID'                  = $DoNothingIdentity.Sid
                 "UserRightsAssignment" = $UserRightsAssignment

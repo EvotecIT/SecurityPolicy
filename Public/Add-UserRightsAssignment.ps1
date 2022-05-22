@@ -79,7 +79,7 @@
                     "Identity"             = $ConvertedIdentity.Name
                     'SID'                  = $ConvertedIdentity.Sid
                     "UserRightsAssignment" = $UserRightsAssignment
-                    "Status"               = 'Failed'
+                    "Status"               = 'Failure'
                     "Error"                = $($_.Exception.Message)
                 }
             }
