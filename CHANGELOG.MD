@@ -1,5 +1,10 @@
 ﻿## Changelog
 
+## 0.0.5 - 2022.05.22
+- Added `Set-SecurityPolicy` using secedit.exe to set the security policy.
+- Added `Get-SecurityPolicy` using secedit.exe to read the current security policy.
+- Small changes to `Add-UserRightsAssignement` and `Remove-UserRightsAssignement` changing `Failed` to `Failure`
+
 ## 0.0.4 - 2022.05.21
 - Fixes `Set-UserRightsAssignment` output when `DoNothing` is shown.
 
