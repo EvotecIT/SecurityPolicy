@@ -32,7 +32,7 @@
     #>
     [CmdletBinding(DefaultParameterSetName = 'SystemAccess')]
     param(
-        [string] $ConfigFile = "$env:TEMP\Temp\security.cfg",
+        [string] $ConfigFile = "$env:TEMP\security.cfg",
         [Parameter(ParameterSetName = 'All')][switch] $All,
         [Parameter(Mandatory, ParameterSetName = 'SystemAccess')][ValidateSet(
             'MinimumPasswordAge'          , #0

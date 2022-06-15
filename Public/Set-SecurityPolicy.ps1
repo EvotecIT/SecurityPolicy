@@ -45,7 +45,7 @@
             'EnableGuestAccount'            #0
         )][string] $SystemAccess,
         [Parameter(Mandatory)][object] $Value,
-        [string] $ConfigFile = "$env:windir\Temp\security.cfg",
+        [string] $ConfigFile = "$env:TEMP\security.cfg",
         [switch] $Suppress
     )
     if ($PSCmdlet.ShouldProcess("$SystemAccess to $Value", "Set-SecurityPolicy")) {
