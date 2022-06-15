@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.6 - 2022.06.15
+- Fixes `Get-SecurityPolicy/Set-SecurityPolicy`
+
 ## 0.0.5 - 2022.05.22
 - Added `Set-SecurityPolicy` using secedit.exe to set the security policy.
 - Added `Get-SecurityPolicy` using secedit.exe to read the current security policy.
