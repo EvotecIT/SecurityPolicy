@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.7 - 2022.07.19
+- Fixes `Set-SecurityPolicy`
+
 ## 0.0.6 - 2022.06.15
 - Fixes `Get-SecurityPolicy/Set-SecurityPolicy`
 
