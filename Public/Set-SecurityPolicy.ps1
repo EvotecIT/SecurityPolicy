@@ -50,7 +50,7 @@
     )
     if ($PSCmdlet.ShouldProcess("$SystemAccess to $Value", "Set-SecurityPolicy")) {
         try {
-            $Object = Get-SecurityPolicy -ConfigFile $ConfigFile -ErrorAction Stop
+            $Object = Get-SecurityPolicy -ConfigFile $ConfigFile -ErrorAction Stop -All
         } catch {
             if (-not $Suppress) {
                 [PSCustomObject] @{
