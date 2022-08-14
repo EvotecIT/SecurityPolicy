@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.8 - 2022.08.14
+- Improvements to speed processing
+
 ## 0.0.7 - 2022.07.19
 - Fixes `Set-SecurityPolicy`
 
