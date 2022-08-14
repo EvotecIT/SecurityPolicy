@@ -8,7 +8,7 @@
     Description          = 'Module that allows getting, adding and removing User Rights Assignment without using secedit.exe'
     FunctionsToExport    = @('Add-UserRightsAssignment', 'Get-SecurityPolicy', 'Get-UserRightsAssignment', 'Remove-UserRightsAssignment', 'Set-SecurityPolicy', 'Set-UserRightsAssignment')
     GUID                 = '0e3eaa53-5e0b-4f10-9375-d6a0a9a1eb45'
-    ModuleVersion        = '0.0.8'
+    ModuleVersion        = '0.0.9'
     PowerShellVersion    = '5.1'
     PrivateData          = @{
         PSData = @{
