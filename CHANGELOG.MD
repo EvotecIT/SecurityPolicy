@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.10 - 2022.08.14
+- Improvements to speed processing
+
 ## 0.0.9 - 2022.08.14
 - Using library dot sourcing instead of ScriptsToProcess
 
