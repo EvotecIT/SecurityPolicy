@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.12 - 2022.10.16
+- Fixes issue with unresolvable SIDs for Get/Remove/Set commands. Thnx @jborean93
+
 ## 0.0.11 - 2022.08.15
 - Improvements to speed processing (dependant module [PSSharedGoods](https://github.com/EvotecIT/PSSharedGoods), which is merged on build time)
 
