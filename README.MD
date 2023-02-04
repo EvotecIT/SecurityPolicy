@@ -94,3 +94,69 @@ Update-Module -Name SecurityPolicy
 That's it. Whenever there's a new version you simply run the command and you can enjoy it. Remember, that you may need to close, reopen the PowerShell session if you have already used the module before updating it.
 
 **The important thing** is if something works for you on production, keep using it till you test the new version on a test computer. I do changes that may not be big, but big enough that auto-update will break your code. For example, small rename to a parameter and your code stops working! Be responsible!
+
+### Using SecurityPolicy
+
+#### Getting and setting Security Policies
+
+```powershell
+$SecurityPolicies = Get-SecurityPolicy -Verbose -All
+# $SecurityPolicies | Format-Table
+
+$SecurityPolicies.'Unicode' | Format-Table
+$SecurityPolicies.'System Access' | Format-Table
+# $SecurityPolicies.'Event Audit' | Format-Table
+# $SecurityPolicies.'Registry Values' | Format-Table
+# $SecurityPolicies.'Privilege Rights' | Format-Table
+# $SecurityPolicies.'Version' | Format-Table
+
+
+Set-SecurityPolicy -SystemAccess MinimumPasswordAge -Value 1
+```
+
+#### Getting and setting User Rights Assignment
+
+Adding and removing UserRightsAssignment can be done using `Add-UserRightsAssignment` and `Remove-UserRightsAssignment`.
+
+```powershell
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeTrustedCredManAccessPrivilege #-Computer AD1
+$Output | Format-Table
+
+Remove-UserRightsAssignment -UserRightsAssignment SeTrustedCredManAccessPrivilege -Identity "S-1-5-21-853615985-2870445339-3163598659-4098"
+
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeTrustedCredManAccessPrivilege #-Computer AD1
+$Output | Format-Table
+
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output | Format-Table
+
+Add-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
+
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output | Format-Table
+
+Remove-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity "Evotec\Administrator"
+
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output | Format-Table
+```
+
+Or you can use `Set-UserRightsAssignment` which will add and remove identities for you in one command.
+
+```powershell
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output | Format-Table
+
+$Identity = @(
+    'BUILTIN\Backup Operators'
+    'BUILTIN\Administrators'
+    'Guest'
+    #'BUILTIN\Users'
+    #'przemyslaw.klys'
+)
+
+Set-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege -Identity $Identity -WhatIf #-Computer AD1
+
+$Output = Get-UserRightsAssignment -UserRightsAssignment SeBackupPrivilege #-Computer AD1
+$Output | Format-Table
+```
