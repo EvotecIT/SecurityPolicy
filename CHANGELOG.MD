@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.13 - 2023.02.04
+- Fixes issue with `"NT AUTHORITY\LOCAL SERVICE" is misnamed as "NT AUTHORITY\NETWORK SERVICE".`
+
 ## 0.0.12 - 2022.10.16
 - Fixes issue with unresolvable SIDs for Get/Remove/Set commands. Thnx @jborean93
 
