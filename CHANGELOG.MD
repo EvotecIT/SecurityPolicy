@@ -1,5 +1,8 @@
 ﻿## Changelog
 
+## 0.0.14
+- Adds support for other static `NT SERVICE` accounts such as SQL ones. Resolves [#4](https://github.com/EvotecIT/SecurityPolicy/issues/4)
+
 ## 0.0.13 - 2023.02.04
 - Fixes issue with `"NT AUTHORITY\LOCAL SERVICE" is misnamed as "NT AUTHORITY\NETWORK SERVICE".`
 
